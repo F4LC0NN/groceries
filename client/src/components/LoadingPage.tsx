@@ -61,7 +61,7 @@ export default function LoadingPage() {
                     />
                 </g>
             </svg>
-            <p className="font-bold text-lg">Loading Data...</p>
+            <p>Loading Data...</p>
         </div>
     );
 }
