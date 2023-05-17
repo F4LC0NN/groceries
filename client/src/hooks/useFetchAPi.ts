@@ -1,27 +1,30 @@
 import { useState, useEffect } from "react";
+import ProductInterface from "@interfaces/ProductInterface";
 
 export default function useFetchApi(apiURL: string) {
-    const [data, setData] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [data, setData] = useState<ProductInterface[] | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
 
     async function fetchApi() {
-        setIsLoading((_prev) => (_prev = true));
-
-        const response = await fetch(apiURL);
-        const api = await response.json();
-        setData((_prev) => (_prev = api));
-
-        setIsLoading((_prev) => (_prev = false));
+        try {
+            const response = await fetch(apiURL);
+            const api = await response.json();
+            setData((_prev) => (_prev = api));
+        } catch (error: any) {
+            setError((_prev) => (_prev = error.message));
+        } finally {
+            setLoading((_prev) => (_prev = false));
+        }
     }
 
     useEffect(() => {
-        fetchApi()
-            .then((r) => r)
-            .catch((err) => console.error(err));
+        fetchApi();
     }, []);
 
     return {
         data,
-        isLoading,
+        loading,
+        error,
     };
 }
