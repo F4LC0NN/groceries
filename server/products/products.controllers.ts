@@ -9,13 +9,13 @@ async function getAllProducts(req: Request, res: Response) {
         data = await prisma.product.findMany();
     } catch (error) {
         console.error(error);
-        res.status(200).json({ error: error });
+        res.status(404).json({ error: error });
     }
 
     if (!data || data === null || data.length <= 0)
         return res.status(404).json({ info: "No products found", error: 404 });
 
-    res.json(data);
+    res.status(200).json(data);
 }
 
 async function addProduct(req: Request, res: Response) {
@@ -35,14 +35,12 @@ async function addProduct(req: Request, res: Response) {
     }
 
     if (!data || data === null || Object.keys(req.body).length === 0)
-        return res
-            .status(400)
-            .json({
-                info: "Not enough information to add a product",
-                error: 400,
-            });
+        return res.status(400).json({
+            info: "Not enough information to add a product",
+            error: 400,
+        });
 
-    res.status(201).json(data);
+    res.status(302).redirect("http://localhost:5173");
 }
 
 export { getAllProducts, addProduct };

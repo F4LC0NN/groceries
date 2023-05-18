@@ -14,7 +14,7 @@ export default function ProductCard({
     const [checked, setChecked] = useState(false);
 
     return (
-        <>
+        <div className="overflow-y-scroll">
             <motion.div
                 className={checked ? STYLES.card.open : STYLES.card.closed}
             >
@@ -80,6 +80,6 @@ export default function ProductCard({
                     </button>
                 </div>
             </motion.div>
-        </>
+        </div>
     );
 }

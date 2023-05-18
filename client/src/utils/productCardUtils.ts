@@ -11,7 +11,7 @@ const VARIANTS = {
         closed: {},
     },
     cardText: {
-        open: { color: COLORS.white },
+        open: { color: COLORS.black },
         closed: { color: COLORS.black },
     },
     cardDetails: {
@@ -23,7 +23,7 @@ const VARIANTS = {
         closed: { rotate: 0 },
     },
     arrowPath: {
-        open: { fill: COLORS.lightGrey },
+        open: { fill: COLORS.mediumGrey },
         closed: { fill: COLORS.mediumGrey },
     },
     checkbox: {
@@ -34,7 +34,7 @@ const VARIANTS = {
 
 const STYLES = {
     card: {
-        open: "w-screen h-16 flex justify-between items-center bg-Green4 shadow-md",
+        open: "w-screen h-16 flex justify-between items-center bg-Green3 shadow-md",
         closed: "w-screen h-16 flex justify-between items-center bg-white shadow-md",
     },
     cardTextContainer: "w-full h-16 flex p-4 items-center gap-4",
