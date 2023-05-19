@@ -5,7 +5,8 @@
     "main": "server.ts",
     "scripts": {
         "dev": "nodemon server.ts",
-        "start": "start server.ts"
+        "start": "start server.ts",
+        "build": "tsc"
     },
     "keywords": [],
     "author": "",
