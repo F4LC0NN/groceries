@@ -10,6 +10,8 @@ export default function Create() {
         details: "",
     });
 
+    const URL = "http://localhost:8000/add";
+
     const [_, navigate] = useLocation();
 
     async function addProduct(event: any) {
@@ -28,7 +30,7 @@ export default function Create() {
             details: form.details,
         };
 
-        await fetch("http://localhost:8000/add", {
+        await fetch(URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData),
@@ -38,5 +40,12 @@ export default function Create() {
 
         window.location.reload();
     }
-    return <Form submitHandler={addProduct} form={form} setForm={setForm} />;
+    return (
+        <Form
+            action={URL}
+            submitHandler={addProduct}
+            form={form}
+            setForm={setForm}
+        />
+    );
 }

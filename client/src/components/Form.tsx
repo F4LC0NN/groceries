@@ -1,10 +1,12 @@
 import { FormEventHandler } from "react";
 
 export default function Form({
+    action,
     submitHandler,
     form,
     setForm,
 }: {
+    action?: string;
     submitHandler?: FormEventHandler;
     form?: any;
     setForm?: any;
@@ -12,12 +14,11 @@ export default function Form({
     return (
         <div className="w-screen h-screen flex justify-center items-center bg-white">
             <form
-                action="http://localhost:8000/add"
+                action={action}
                 method="POST"
                 className="h-96 p-4 grid gap-6"
                 onSubmit={submitHandler}
             >
-                <h1 className="justify-self-center">Add product</h1>
                 <div className="grid gap-1">
                     <label htmlFor="name" className="px-2">
                         Name
@@ -71,7 +72,7 @@ export default function Form({
                         type="submit"
                         className="w-full p-3 grid font-bold text-white rounded-md bg-Green4 shadow-md"
                     >
-                        Add
+                        Submit
                     </button>
                 </div>
             </form>

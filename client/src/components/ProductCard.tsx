@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import ProductInterface from "@interfaces/ProductInterface";
 
 import { STYLES, VARIANTS } from "@utils/productCardUtils";
+import { useLocation } from "wouter";
 
 export default function ProductCard({
     product,
@@ -13,8 +14,18 @@ export default function ProductCard({
     const [showDetails, setShowDetais] = useState(false);
     const [checked, setChecked] = useState(false);
 
+    const [_, navigate] = useLocation();
+
+    async function deleteProduct() {
+        await fetch(`http://localhost:8000/delete/${product.id}`, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id: product.id }),
+        });
+    }
+
     return (
-        <div className="overflow-y-scroll">
+        <div className="overflow-y-scroll" data-productid={product.id}>
             <motion.div
                 className={checked ? STYLES.card.open : STYLES.card.closed}
             >
@@ -72,10 +83,22 @@ export default function ProductCard({
                     ))}
                 </ul>
                 <div className={STYLES.cardDetailsButtonContainer}>
-                    <button className={STYLES.cardDetailsEditButton}>
+                    <button
+                        className={STYLES.cardDetailsEditButton}
+                        onClick={() => {
+                            navigate(`/edit/${product.id}`);
+                        }}
+                    >
                         Edit
                     </button>
-                    <button className={STYLES.cardDetailsDeleteButton}>
+                    <button
+                        className={STYLES.cardDetailsDeleteButton}
+                        onClick={() => {
+                            deleteProduct();
+                            navigate("/", { replace: true });
+                            window.location.reload();
+                        }}
+                    >
                         Delete
                     </button>
                 </div>

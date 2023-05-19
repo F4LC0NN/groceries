@@ -7,6 +7,7 @@ import { navigate } from "wouter/use-location";
 
 export default function Products() {
     const { data } = useContext(ApiProviderContext);
+
     return (
         <>
             <div className="mb-16">
