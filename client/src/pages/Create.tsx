@@ -30,22 +30,19 @@ export default function Create() {
             details: form.details,
         };
 
-        await fetch(URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData),
-        });
+        try {
+            await fetch(URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+        } catch (error) {
+            console.error(error);
+        }
 
         navigate("/", { replace: true });
 
         window.location.reload();
     }
-    return (
-        <Form
-            action={URL}
-            submitHandler={addProduct}
-            form={form}
-            setForm={setForm}
-        />
-    );
+    return <Form submitHandler={addProduct} form={form} setForm={setForm} />;
 }
